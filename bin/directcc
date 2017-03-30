@@ -1,0 +1,146 @@
+#!/usr/bin/env node
+
+const esprima          = require('esprima')
+    , escodegen        = require('escodegen')
+    , estraverse       = require('estraverse')
+    , escope           = require('escope')
+    , source           = require('ast-declaration-source')
+    , astw             = require('astw')
+    , getStdin         = require('get-stdin')
+    , fs               = require('fs')
+    , commandLineArgs  = require('command-line-args')
+    , getUsage         = require('command-line-usage')
+    ;
+
+// =========================================================================== 
+
+function wrapWithYieldExpression(node) {
+  return {
+    type: 'BinaryExpression',
+    operator: '*',
+    left: {
+      type: 'Identifier',
+      name: 'yield' },
+    right: node
+  };
+}
+
+function convertScript(program) {
+  var ast = esprima.parse(program);
+  astw(ast)(function(){});
+
+  var scopeManager = escope.analyze(ast);
+  var currentScope = scopeManager.acquire(ast);
+
+  estraverse.replace(ast, {
+    enter: function(node, parent) {
+      var replacement = node;
+      if (/CallExpression/.test(node.type) && node.callee.name && !node.visited) {
+        if (/_kehyield_$/.test(node.callee.name)) {
+          currentScope.block.generator = true;
+          currentScope.block.kehyield = true;
+          replacement =  wrapWithYieldExpression(node);
+        } else {
+          var declaration = source(node.callee);
+          if (declaration && declaration.parent && declaration.parent.kehyield) {
+            currentScope.block.generator = true;
+            currentScope.block.kehyield = true;
+            replacement = wrapWithYieldExpression(node);
+          }
+        }
+      }
+
+      if (/Function/.test(node.type)) {
+        currentScope = scopeManager.acquire(node);
+      }
+
+      node.visited = true;
+      return replacement;
+    },
+    leave: function(node, parent) {
+      if (/Function/.test(node.type)) {
+        currentScope = currentScope.upper;
+      }
+    }
+  });
+
+  return escodegen.generate(ast);
+}
+
+function handleOutput(options, contents) {
+  if (options.output) {
+    fs.writeFile(options.output, contents, (err) => {
+      if (err) return console.err(err);
+    });
+  } else {
+    console.log(contents);
+  }
+}
+
+// =========================================================================== 
+
+const optionDefinitions = [
+  { name: 'input', alias: 'i', type: String, defaultOption: true },
+  { name: 'output', alias: 'o', type: String },
+  { name: 'stdin', alias: 'I', type: Boolean },
+  { name: 'stdout', alias: 'O', type: Boolean },
+  { name: 'help', alias: 'h', type: Boolean }
+]
+
+const sections = [
+  {
+    header: 'atscntrb-keh-direct.js',
+    content: 'Processes atscc2js output and converts it to support yieldable functions.'
+  },
+  {
+    header: 'Options',
+    optionList: [
+      {
+        name: 'input',
+        alias: 'i',
+        defaultOption: true,
+        typeLabel: '[underline]{file}',
+        description: 'The input to process.'
+      },
+      {
+        name: 'stdin',
+        alias: 'I',
+        description: 'Take input from stdin.'
+      },
+      {
+        name: 'output',
+        alias: 'o',
+        typeLabel: '[underline]{file}',
+        description: 'The output file.'
+      },
+      {
+        name: 'stdout',
+        alias: 'O',
+        description: 'Output to stdout.'
+      },
+      {
+        name: 'help',
+        alias: 'h',
+        description: 'Print this usage guide.'
+      }
+    ]
+  }
+]
+
+const options = commandLineArgs(optionDefinitions)
+
+if (options.help) {
+  console.log(getUsage(sections));
+} else if (options.stdin) {
+  getStdin()
+    .then((contents) => { handleOutput(options, convertScript(contents)); })
+    .catch((err) => { console.err(err); })
+} else if (options.input) {
+  fs.readFile(options.input, 'utf8', (err, contents) => {
+    if (err) return console.log(err);
+    handleOutput(options, convertScript(contents));
+  });
+} else {
+  console.log(getUsage(sections));
+}
+
