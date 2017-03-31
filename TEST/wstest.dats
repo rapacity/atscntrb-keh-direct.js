@@ -1,41 +1,22 @@
 
 #include "share/atspre_define.hats"
-#include "{$LIBATSCC2JS}/staloadall.hats"
+#include "{$LIBATSCC2JS}/mylibies.hats"
 
 #include "../SATS/direct.sats"
 
 
-%{^
-
-function prompt_int(msg, v) {
-  return parseInt(prompt(msg, v));
-}
-
-%}
-
-
-extern fun
-galert{a:vt@ype}(a): void = "mac#alert"
-
-
-extern fun
-prompt_int(string, int): int = "mac#prompt_int"
-
-
-
 
 fun worker(ch: chendpt): void = let
-  val a  = prompt_int("Enter a number:", 0)
+  val a  = parseInt(prompt_some("Enter a number:", "0"))
   val () = chsend(ch, a)
-  val () = galert("message sent!")
+  val () = alert("message sent!")
 
-  val b  = prompt_int("Enter another number:", 0)
+  val b  = parseInt(prompt_some("Enter another number:", "0"))
   val () = chsend(ch, b)
-  val () = galert("message sent!")
+  val () = alert("message sent!")
 
   val n  = chrecv(ch)
-  val () = galert(n)
-
+  val () = alert(n)
 in end
 
 

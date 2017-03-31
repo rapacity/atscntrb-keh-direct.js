@@ -8,14 +8,7 @@
         M.wakeup();
     }
 }());
-function console_log(a) {
-    console.log(a);
-}
-function rand() {
-    return Math.random();
-}
-function* helloloop_0(arg0) {
-    var apy0;
+function* helloloop_0() {
     var tmp2;
     var tmp3;
     var tmp4;
@@ -23,17 +16,15 @@ function* helloloop_0(arg0) {
     var tmplab, tmplab_js;
     while (true) {
         funlab_js = 0;
-        tmp4 = rand();
+        tmp4 = ats2jspre_JSmath_random();
         tmp3 = ats2jspre_gt_double_double(tmp4, 0.5);
         if (tmp3) {
             tmp2 = 'HELLO';
         } else {
             tmp2 = 'BYE';
         }
-        console_log(tmp2);
+        ats2jspre_console_log(tmp2);
         yield * _ats2keh_sleep_kehyield_(2000);
-        apy0 = arg0;
-        arg0 = apy0;
         funlab_js = 1;
         if (funlab_js > 0)
             continue;
@@ -49,7 +40,7 @@ function* producer_1(arg0) {
     var tmplab, tmplab_js;
     while (true) {
         funlab_js = 0;
-        tmp8 = rand();
+        tmp8 = ats2jspre_JSmath_random();
         tmp7 = ats2jspre_mul_double_int(tmp8, 100000);
         yield * _ats2keh_sleep_kehyield_(1000);
         yield * _ats2keh_dualChannelWrite_kehyield_(arg0, tmp7);
@@ -72,7 +63,7 @@ function* consumer_2(arg0) {
         funlab_js = 0;
         tmp12 = yield * _ats2keh_dualChannelRead_kehyield_(arg0);
         tmp14 = ats2jspre_string_append('recieved from producer: ', tmp12);
-        console_log(tmp14);
+        ats2jspre_console_log(tmp14);
         apy0 = arg0;
         arg0 = apy0;
         funlab_js = 1;
