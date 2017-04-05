@@ -14,20 +14,22 @@ in end
 fun producer(ch: chendpt): void = let
   val n  = JSmath_random() * 100000
   val () = sleep(1000)
-  val () = chsend(ch, n);
+  val () = ch1send(ch, n);
   val () = producer(ch)
 in end
 
 fun consumer(ch: chendpt): void = let
-  val n  = chrecv(ch)
+  val n  = ch1recv(ch)
   val () = console_log("recieved from producer: " + n)
   val () = consumer(ch)
 in end
 
 implement main0() = let
-  val '(chneg, chpos) = chmake()
-  val _ = go(producer, '(chneg))
-  val _ = go(consumer, '(chpos))
+  val '(chin0, chout0) = ch1make()
+  val '(chin1, chout1) = ch1make()
+  val () = ch1link(chin0, chout1)
+  val _ = go(producer, '(chout0))
+  val _ = go(consumer, '(chin1))
   val _ = go(helloloop)
 in end
 

@@ -21,7 +21,7 @@ in end
 
 
 implement main0() = let
-  val ch = make_webchan("ws://localhost:5000/")
+  val ch = chmake_ws("ws://localhost:5000/")
   val co = go(worker, '(ch))
 in end
 
