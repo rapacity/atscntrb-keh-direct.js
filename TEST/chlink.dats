@@ -25,9 +25,14 @@ fun consumer(ch: chendpt): void = let
 in end
 
 implement main0() = let
-  val '(chneg0, chpos0) = chmake()
-  val '(chneg1, chpos1) = chmake()
-  val () = chlink(chpos0, chneg1)
+  val '(chneg0, chpos0) = ch2make()
+  val '(chneg1, chpos1) = ch2make()
+  val '(chneg2, chpos2) = ch2make()
+
+  val () = ch2link(chpos0, chneg1)
+  val () = ch2link(chpos1, chneg2)
+  val () = ch2link(chpos2, chneg0)
+
   val _ = go(producer, '(chneg0))
   val _ = go(consumer, '(chpos1))
   val _ = go(helloloop)

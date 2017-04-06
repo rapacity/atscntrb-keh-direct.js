@@ -2,6 +2,10 @@
 abstype coroutine
 abstype chendpt
 
+abstype ch1in
+abstype ch1out
+abstype ch2endpt
+
 extern fun
 yield{a:vt@ype}(): a = "mac#_ats2keh_kehyield_"
 
@@ -31,20 +35,55 @@ chclose(chendpt): void = "mac#_ats2keh_dualChannelClose"
 // --------------------------------------------------------------------------- 
 
 extern fun
-ch1make{a:t@ype}(): '(chendpt, chendpt) = "mac#_ats2keh_ch1make"
+ch1make{a:t@ype}(): '(ch1in, ch1out) = "mac#_ats2keh_ch1make"
 
 extern fun
-ch1send{a:vt@ype}(chendpt, a): void = "mac#_ats2keh_ch1send_kehyield_"
+ch1send{a:vt@ype}(ch1out, a): void = "mac#_ats2keh_ch1send_kehyield_"
 
 extern fun
-ch1recv{a:vt@ype}(chendpt): a = "mac#_ats2keh_ch1recv_kehyield_"
+ch1recv{a:vt@ype}(ch1in): a = "mac#_ats2keh_ch1recv_kehyield_"
 
 extern fun
-ch1close(chendpt): void = "mac#_ats2keh_ch1close"
+ch1inclose(ch1in): void = "mac#_ats2keh_ch1close"
 
 extern fun
-ch1link(chendpt, chendpt): void = "mac#_ats2keh_ch1link"
+ch1outclose(ch1out): void = "mac#_ats2keh_ch1close"
 
+overload ch1close with ch1inclose
+overload ch1close with ch1outclose
+
+
+extern fun
+ch1indup(ch1in): ch1in = "mac#_ats2keh_ch1indup"
+
+extern fun
+ch1outdup(ch1out): ch1out = "mac#_ats2keh_ch1outdup"
+
+overload ch1dup with ch1indup
+overload ch1dup with ch1outdup
+
+extern fun
+ch1link(ch1in, ch1out): void = "mac#_ats2keh_ch1link"
+
+// --------------------------------------------------------------------------- 
+
+extern fun
+ch2make{a:t@ype}(): '(ch2endpt, ch2endpt) = "mac#_ats2keh_ch2make"
+
+extern fun
+ch2send{a:vt@ype}(ch2endpt, a): void = "mac#_ats2keh_ch2send_kehyield_"
+
+extern fun
+ch2recv{a:vt@ype}(ch2endpt): a = "mac#_ats2keh_ch2recv_kehyield_"
+
+extern fun
+ch2link(ch2endpt, ch2endpt): void = "mac#_ats2keh_ch2link"
+
+extern fun
+ch2close(ch2endpt): void = "mac#_ats2keh_ch2close"
+
+extern fun
+ch2dup(ch2endpt): ch2endpt = "mac#_ats2keh_ch2dup"
 
 
 // --------------------------------------------------------------------------- 
