@@ -43,7 +43,7 @@ function* producer_1(arg0) {
         tmp8 = ats2jspre_JSmath_random();
         tmp7 = ats2jspre_mul_double_int(tmp8, 100000);
         yield * _ats2keh_sleep_kehyield_(1000);
-        yield * _ats2keh_dualChannelWrite_kehyield_(arg0, tmp7);
+        yield * _ats2keh_ch2send_kehyield_(arg0, tmp7);
         apy0 = arg0;
         arg0 = apy0;
         funlab_js = 1;
@@ -61,7 +61,7 @@ function* consumer_2(arg0) {
     var tmplab, tmplab_js;
     while (true) {
         funlab_js = 0;
-        tmp12 = yield * _ats2keh_dualChannelRead_kehyield_(arg0);
+        tmp12 = yield * _ats2keh_ch2recv_kehyield_(arg0);
         tmp14 = ats2jspre_string_append('recieved from producer: ', tmp12);
         ats2jspre_console_log(tmp14);
         apy0 = arg0;
@@ -83,7 +83,7 @@ function main0() {
     var tmp22;
     var tmp23;
     var tmplab, tmplab_js;
-    tmp16 = _ats2keh_makeDualChannel();
+    tmp16 = _ats2keh_ch2make();
     tmp17 = tmp16[0];
     tmp18 = tmp16[1];
     tmp20 = [tmp17];

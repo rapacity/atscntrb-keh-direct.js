@@ -6,17 +6,19 @@
 
 
 
-fun worker(ch: chendpt): void = let
+fun worker(ch: ch2endpt): void = let
   val a  = parseInt(prompt_some("Enter a number:", "0"))
-  val () = chsend(ch, a)
+  val () = ch2send(ch, a)
   val () = alert("message sent!")
 
   val b  = parseInt(prompt_some("Enter another number:", "0"))
-  val () = chsend(ch, b)
+  val () = ch2send(ch, b)
   val () = alert("message sent!")
 
-  val n  = chrecv(ch)
+  val n  = ch2recv(ch)
   val () = alert(n)
+
+  val () = ch2close(ch)
 in end
 
 

@@ -1,10 +1,9 @@
 
 abstype coroutine
-abstype chendpt
 
-abstype ch1in
-abstype ch1out
-abstype ch2endpt
+absviewtype ch1in
+absviewtype ch1out
+absviewtype ch2endpt
 
 extern fun
 yield{a:vt@ype}(): a = "mac#_ats2keh_kehyield_"
@@ -21,27 +20,13 @@ overload go with go_nil
 // --------------------------------------------------------------------------- 
 
 extern fun
-chmake{a:t@ype}(): '(chendpt, chendpt) = "mac#_ats2keh_makeDualChannel"
-
-extern fun
-chsend{a:vt@ype}(chendpt, a): void = "mac#_ats2keh_dualChannelWrite_kehyield_"
-
-extern fun
-chrecv{a:vt@ype}(chendpt): a = "mac#_ats2keh_dualChannelRead_kehyield_"
-
-extern fun
-chclose(chendpt): void = "mac#_ats2keh_dualChannelClose"
-
-// --------------------------------------------------------------------------- 
-
-extern fun
 ch1make{a:t@ype}(): '(ch1in, ch1out) = "mac#_ats2keh_ch1make"
 
 extern fun
-ch1send{a:vt@ype}(ch1out, a): void = "mac#_ats2keh_ch1send_kehyield_"
+ch1send{a:vt@ype}(!ch1out, a): void = "mac#_ats2keh_ch1send_kehyield_"
 
 extern fun
-ch1recv{a:vt@ype}(ch1in): a = "mac#_ats2keh_ch1recv_kehyield_"
+ch1recv{a:vt@ype}(!ch1in): a = "mac#_ats2keh_ch1recv_kehyield_"
 
 extern fun
 ch1inclose(ch1in): void = "mac#_ats2keh_ch1close"
@@ -54,10 +39,10 @@ overload ch1close with ch1outclose
 
 
 extern fun
-ch1indup(ch1in): ch1in = "mac#_ats2keh_ch1indup"
+ch1indup(!ch1in): ch1in = "mac#_ats2keh_ch1indup"
 
 extern fun
-ch1outdup(ch1out): ch1out = "mac#_ats2keh_ch1outdup"
+ch1outdup(!ch1out): ch1out = "mac#_ats2keh_ch1outdup"
 
 overload ch1dup with ch1indup
 overload ch1dup with ch1outdup
@@ -71,10 +56,10 @@ extern fun
 ch2make{a:t@ype}(): '(ch2endpt, ch2endpt) = "mac#_ats2keh_ch2make"
 
 extern fun
-ch2send{a:vt@ype}(ch2endpt, a): void = "mac#_ats2keh_ch2send_kehyield_"
+ch2send{a:vt@ype}(!ch2endpt, a): void = "mac#_ats2keh_ch2send_kehyield_"
 
 extern fun
-ch2recv{a:vt@ype}(ch2endpt): a = "mac#_ats2keh_ch2recv_kehyield_"
+ch2recv{a:vt@ype}(!ch2endpt): a = "mac#_ats2keh_ch2recv_kehyield_"
 
 extern fun
 ch2link(ch2endpt, ch2endpt): void = "mac#_ats2keh_ch2link"
@@ -83,23 +68,17 @@ extern fun
 ch2close(ch2endpt): void = "mac#_ats2keh_ch2close"
 
 extern fun
-ch2dup(ch2endpt): ch2endpt = "mac#_ats2keh_ch2dup"
-
+ch2dup(!ch2endpt): ch2endpt = "mac#_ats2keh_ch2dup"
 
 // --------------------------------------------------------------------------- 
-extern fun
-chlink(chendpt, chendpt): void = "mac#_ats2keh_channelTwoLink"
 
 extern fun
-chmake_multi(int): void = "mac#_ats2keh_makeMultiChannel"
+chmake_ws(string): ch2endpt = "mac#_ats2keh_makeWebSocketChannel"
 
 // --------------------------------------------------------------------------- 
 
 extern fun
 sleep(int): void = "mac#_ats2keh_sleep_kehyield_"
-
-extern fun
-chmake_ws(string): chendpt = "mac#_ats2keh_makeWebSocketChannel"
 
 extern fun
 main0(): void = "main0"
