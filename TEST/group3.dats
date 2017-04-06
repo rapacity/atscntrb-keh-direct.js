@@ -29,18 +29,22 @@ fun worker2(ch: ch2endpt): void = let
   val ()  = worker2(ch)
 in end
 
+
+fun ch3link(ch0: ch2endpt, ch1: ch2endpt, ch2: ch2endpt): void = let
+  val ch0d = ch2dup(ch0)
+  val ch1d = ch2dup(ch1)
+  val ch2d = ch2dup(ch2)
+  val () = ch2link(ch0,  ch1)
+  val () = ch2link(ch0d, ch2)
+  val () = ch2link(ch1d, ch2d)
+in end
+
 implement main0() = let
   val '(chneg0, chpos0) = ch2make()
   val '(chneg1, chpos1) = ch2make()
   val '(chneg2, chpos2) = ch2make()
 
-  val chpos0d = ch2dup(chpos0)
-  val chpos1d = ch2dup(chpos1)
-  val chpos2d = ch2dup(chpos2)
-
-  val () = ch2link(chpos0, chpos1)
-  val () = ch2link(chpos0d, chpos2)
-  val () = ch2link(chpos1d, chpos2d)
+  val () = ch3link(chpos0, chpos1, chpos2)
 
   val _ = go(worker0, '(chneg0))
   val _ = go(worker1, '(chneg1))
