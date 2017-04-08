@@ -13,7 +13,8 @@ all: \
 	chlink_dats_direct.js \
 	ch1test_dats_direct.js \
 	ch2test_dats_direct.js \
-	group3_dats_direct.js
+	group3_dats_direct.js \
+	sieve_dats_direct.js 
 
 %_dats.c: %.dats
 	$(PATSCC2) -ccats -o $@ $<

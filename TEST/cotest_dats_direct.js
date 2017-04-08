@@ -8,6 +8,27 @@
         M.wakeup();
     }
 }());
+function __patsfun_4__closurerize(env0) {
+    return [
+        function (cenv) {
+            return __patsfun_4(cenv[1]);
+        },
+        env0
+    ];
+}
+function __patsfun_5__closurerize(env0) {
+    return [
+        function (cenv) {
+            return __patsfun_5(cenv[1]);
+        },
+        env0
+    ];
+}
+function __patsfun_6__closurerize() {
+    return [function (cenv) {
+            return __patsfun_6();
+        }];
+}
 function* helloloop_0() {
     var tmp2;
     var tmp3;
@@ -78,19 +99,30 @@ function main0() {
     var tmp17;
     var tmp18;
     var tmp19;
-    var tmp20;
     var tmp21;
-    var tmp22;
     var tmp23;
     var tmplab, tmplab_js;
     tmp16 = _ats2keh_ch2make();
     tmp17 = tmp16[0];
     tmp18 = tmp16[1];
-    tmp20 = [tmp17];
-    tmp19 = _ats2keh_addCoroutine(producer_1, tmp20);
-    tmp22 = [tmp18];
-    tmp21 = _ats2keh_addCoroutine(consumer_2, tmp22);
-    tmp23 = _ats2keh_addCoroutine(helloloop_0);
+    tmp19 = _ats2keh_go_cloptr1(__patsfun_4__closurerize(tmp17));
+    tmp21 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp18));
+    tmp23 = _ats2keh_go_cloptr1(__patsfun_6__closurerize());
+    return;
+}
+function* __patsfun_4(env0) {
+    var tmplab, tmplab_js;
+    yield * producer_1(env0);
+    return;
+}
+function* __patsfun_5(env0) {
+    var tmplab, tmplab_js;
+    yield * consumer_2(env0);
+    return;
+}
+function* __patsfun_6() {
+    var tmplab, tmplab_js;
+    yield * helloloop_0();
     return;
 }
 function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_cotest_056_dats__dynload() {

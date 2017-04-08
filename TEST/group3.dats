@@ -46,8 +46,8 @@ implement main0() = let
 
   val () = ch3link(chpos0, chpos1, chpos2)
 
-  val _ = go(worker0, '(chneg0))
-  val _ = go(worker1, '(chneg1))
-  val _ = go(worker2, '(chneg2))
+  val _ = go(worker0(chneg0))
+  val _ = go(worker1(chneg1))
+  val _ = go(worker2(chneg2))
 in end
 

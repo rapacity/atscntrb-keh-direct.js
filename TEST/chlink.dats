@@ -32,8 +32,8 @@ implement main0() = let
   val () = ch2link(chpos0, chneg1)
   val () = ch2link(chpos1, chneg2)
 
-  val _ = go(producer, '(chneg0))
-  val _ = go(consumer, '(chpos2))
-  val _ = go(helloloop)
+  val _ = go(producer(chneg0))
+  val _ = go(consumer(chpos2))
+  val _ = go(helloloop())
 in end
 

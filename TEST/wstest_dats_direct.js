@@ -8,6 +8,14 @@
         M.wakeup();
     }
 }());
+function __patsfun_2__closurerize(env0) {
+    return [
+        function (cenv) {
+            return __patsfun_2(cenv[1]);
+        },
+        env0
+    ];
+}
 function* worker_0(arg0) {
     var tmp1;
     var tmp2;
@@ -31,11 +39,14 @@ function* worker_0(arg0) {
 function main0() {
     var tmp12;
     var tmp13;
-    var tmp14;
     var tmplab, tmplab_js;
     tmp12 = _ats2keh_makeWebSocketChannel('ws://localhost:5000/');
-    tmp14 = [tmp12];
-    tmp13 = _ats2keh_addCoroutine(worker_0, tmp14);
+    tmp13 = _ats2keh_go_cloptr1(__patsfun_2__closurerize(tmp12));
+    return;
+}
+function* __patsfun_2(env0) {
+    var tmplab, tmplab_js;
+    yield * worker_0(env0);
     return;
 }
 function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_wstest_056_dats__dynload() {

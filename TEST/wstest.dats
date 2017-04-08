@@ -24,6 +24,6 @@ in end
 
 implement main0() = let
   val ch = chmake_ws("ws://localhost:5000/")
-  val co = go(worker, '(ch))
+  val co = go(worker(ch))
 in end
 

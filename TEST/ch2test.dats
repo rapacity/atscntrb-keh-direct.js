@@ -37,8 +37,8 @@ implement main0() = let
   val '(chneg2, chpos2) = ch2make()
   val () = ch2link(chpos0, chneg1)
   val () = ch2link(chpos1, chneg2)
-  val _ = go(workerA, '(chneg0))
-  val _ = go(workerB, '(chpos2))
-  val _ = go(helloloop)
+  val _ = go(workerA(chneg0))
+  val _ = go(workerB(chpos2))
+  val _ = go(helloloop())
 in end
 

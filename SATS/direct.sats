@@ -14,8 +14,10 @@ go_apply{a,b:vt@ype}(a, b): coroutine = "mac#_ats2keh_addCoroutine"
 extern fun
 go_nil{a:vt@ype}(a): coroutine = "mac#_ats2keh_addCoroutine"
 
-overload go with go_apply
-overload go with go_nil
+extern fun
+go_cloptr1(() -<lin,cloptr1> void): coroutine = "mac#_ats2keh_go_cloptr1"
+
+macdef go(f) = go_cloptr1(llam() =<cloptr1> ,(f))
 
 // --------------------------------------------------------------------------- 
 
@@ -29,10 +31,10 @@ extern fun
 ch1recv{a:vt@ype}(!ch1in): a = "mac#_ats2keh_ch1recv_kehyield_"
 
 extern fun
-ch1inclose(ch1in): void = "mac#_ats2keh_ch1close"
+ch1inclose(ch1in): void = "mac#_ats2keh_ch1inclose"
 
 extern fun
-ch1outclose(ch1out): void = "mac#_ats2keh_ch1close"
+ch1outclose(ch1out): void = "mac#_ats2keh_ch1outclose"
 
 overload ch1close with ch1inclose
 overload ch1close with ch1outclose

@@ -26,8 +26,8 @@ in end
 
 implement main0() = let
   val '(chneg, chpos) = ch2make()
-  val _ = go(producer, '(chneg))
-  val _ = go(consumer, '(chpos))
-  val _ = go(helloloop)
+  val _ = go(producer(chneg))
+  val _ = go(consumer(chpos))
+  val _ = go(helloloop())
 in end
 

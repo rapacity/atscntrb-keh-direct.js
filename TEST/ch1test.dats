@@ -30,8 +30,8 @@ implement main0() = let
   val '(chin2, chout2) = ch1make()
   val () = ch1link(chin0, chout1)
   val () = ch1link(chin1, chout2)
-  val _ = go(producer, '(chout0))
-  val _ = go(consumer, '(chin2))
-  val _ = go(helloloop)
+  val _ = go(producer(chout0))
+  val _ = go(consumer(chin2))
+  val _ = go(helloloop())
 in end
 
