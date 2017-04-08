@@ -45,9 +45,7 @@ in
    sieve(up2, dn)
 end
 
-
 fun producer(ch: ch2endpt, n: int): void = let
-  //val () = console_log("produced: " + toString(n))
   val () = ch2send(ch, n)
   val () = producer(ch, n+1)
 in end

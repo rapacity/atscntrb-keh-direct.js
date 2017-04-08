@@ -72,6 +72,11 @@ ch2close(ch2endpt): void = "mac#_ats2keh_ch2close"
 extern fun
 ch2dup(!ch2endpt): ch2endpt = "mac#_ats2keh_ch2dup"
 
+extern fun
+ch2split(ch2endpt): '(ch1in, ch1out) = "mac#_ats2keh_ch2split"
+
+
+
 // --------------------------------------------------------------------------- 
 
 extern fun
@@ -86,13 +91,16 @@ extern fun
 main0(): void = "main0"
 
 %{^
-(function(){
-  M.wakeup();
-  if (main0 && main0.constructor) {
-    if (main0.constructor.name === 'GeneratorFunction') M.addCoroutine(main0);
-    else if (main0.constructor.name === 'Function') main0();
-    M.wakeup();
-  }
-})();
+  window.addEventListener("load", function load(event){
+    window.removeEventListener("load", load, false);
+    (function(){
+      M.wakeup();
+      if (main0 && main0.constructor) {
+        if (main0.constructor.name === 'GeneratorFunction') M.addCoroutine(main0);
+        else if (main0.constructor.name === 'Function') M.addJobCallback(main0);
+        M.wakeup();
+      }
+    })();
+  });
 %}
 

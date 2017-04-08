@@ -67,7 +67,7 @@ function* producer_1(arg0) {
         tmp8 = ats2jspre_JSmath_random();
         tmp7 = ats2jspre_mul_double_int(tmp8, 100000);
         yield * _ats2keh_sleep_kehyield_(1000);
-        yield * _ats2keh_ch2send_kehyield_(arg0, tmp7);
+        yield * _ats2keh_ch1send_kehyield_(arg0, tmp7);
         apy0 = arg0;
         arg0 = apy0;
         funlab_js = 1;
@@ -85,7 +85,7 @@ function* consumer_2(arg0) {
     var tmplab, tmplab_js;
     while (true) {
         funlab_js = 0;
-        tmp12 = yield * _ats2keh_ch2recv_kehyield_(arg0);
+        tmp12 = yield * _ats2keh_ch1recv_kehyield_(arg0);
         tmp14 = ats2jspre_string_append('recieved from producer: ', tmp12);
         ats2jspre_console_log(tmp14);
         apy0 = arg0;
@@ -102,15 +102,29 @@ function main0() {
     var tmp17;
     var tmp18;
     var tmp19;
+    var tmp20;
     var tmp21;
+    var tmp22;
     var tmp23;
+    var tmp24;
+    var tmp27;
+    var tmp29;
+    var tmp31;
     var tmplab, tmplab_js;
-    tmp16 = _ats2keh_ch2make();
+    tmp16 = _ats2keh_ch1make();
     tmp17 = tmp16[0];
     tmp18 = tmp16[1];
-    tmp19 = _ats2keh_go_cloptr1(__patsfun_4__closurerize(tmp17));
-    tmp21 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp18));
-    tmp23 = _ats2keh_go_cloptr1(__patsfun_6__closurerize());
+    tmp19 = _ats2keh_ch1make();
+    tmp20 = tmp19[0];
+    tmp21 = tmp19[1];
+    tmp22 = _ats2keh_ch1make();
+    tmp23 = tmp22[0];
+    tmp24 = tmp22[1];
+    _ats2keh_ch1link(tmp17, tmp21);
+    _ats2keh_ch1link(tmp20, tmp24);
+    tmp27 = _ats2keh_go_cloptr1(__patsfun_4__closurerize(tmp18));
+    tmp29 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp23));
+    tmp31 = _ats2keh_go_cloptr1(__patsfun_6__closurerize());
     return;
 }
 function* __patsfun_4(env0) {
@@ -128,10 +142,10 @@ function* __patsfun_6() {
     yield * helloloop_0();
     return;
 }
-function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_cotest_056_dats__dynload() {
+function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_ch1test_056_dats__dynload() {
     var tmplab, tmplab_js;
-    if (ATSCKiseqz(_057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_cotest_056_dats__dynloadflag)) {
-        _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_cotest_056_dats__dynloadflag = 1;
+    if (ATSCKiseqz(_057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_ch1test_056_dats__dynloadflag)) {
+        _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_ch1test_056_dats__dynloadflag = 1;
     }
     return;
 }

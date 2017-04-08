@@ -1,17 +1,20 @@
-(function () {
-    M.wakeup();
-    if (main0 && main0.constructor) {
-        if (main0.constructor.name === 'GeneratorFunction')
-            M.addCoroutine(main0);
-        else if (main0.constructor.name === 'Function')
-            main0();
+window.addEventListener('load', function load(event) {
+    window.removeEventListener('load', load, false);
+    (function () {
         M.wakeup();
-    }
-}());
+        if (main0 && main0.constructor) {
+            if (main0.constructor.name === 'GeneratorFunction')
+                M.addCoroutine(main0);
+            else if (main0.constructor.name === 'Function')
+                M.addJobCallback(main0);
+            M.wakeup();
+        }
+    }());
+});
 function __patsfun_2__closurerize(env0) {
     return [
-        function (cenv) {
-            return __patsfun_2(cenv[1]);
+        function* (cenv) {
+            return yield * __patsfun_2(cenv[1]);
         },
         env0
     ];

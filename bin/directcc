@@ -15,7 +15,8 @@ const esprima          = require('esprima')
 // =========================================================================== 
 
 function wrapWithYieldExpression(node) {
-  return {
+  //console.log(node);
+  var wrap = {
     type: 'BinaryExpression',
     operator: '*',
     left: {
@@ -23,6 +24,7 @@ function wrapWithYieldExpression(node) {
       name: 'yield' },
     right: node
   };
+  return wrap;
 }
 
 function convertScript(program) {
@@ -31,38 +33,102 @@ function convertScript(program) {
 
   var scopeManager = escope.analyze(ast);
   var currentScope = scopeManager.acquire(ast);
+  var declarations = new Set();
+
+  function convertAst(ast) {
+    estraverse.replace(ast, {
+      enter: function(node, parent) {
+        var replacement = node;
+        if (!node.visited) {
+          if (/CallExpression/.test(node.type) && node.callee.name) {
+            var declaration = source(node.callee);
+            if (declaration) {
+              //console.log(declaration);
+              declaration.calls = declaration.calls || [];
+              declaration.calls.push(node);
+              declarations.add(declaration);
+            }
+
+            node.scope = currentScope.block;
+
+            if (/_kehyield_$/.test(node.callee.name)) {
+              node.transformed = true;
+              currentScope.block.generator = true;
+              currentScope.block.kehyield = true;
+              replacement = wrapWithYieldExpression(node);
+            } else {
+              if (declaration && declaration.parent && declaration.parent.kehyield) {
+                node.transformed = true;
+                currentScope.block.generator = true;
+                currentScope.block.kehyield = true;
+                replacement = wrapWithYieldExpression(node);
+              }
+            }
+          }
+ 
+          if (/Function/.test(node.type)) {
+            currentScope = scopeManager.acquire(node);
+          }
+      
+          node.visited = true;
+        }
+        return replacement;
+      },
+      leave: function(node, parent) {
+        if (/Function/.test(node.type)) {
+          currentScope = currentScope.upper;
+        }
+      }
+    });
+  }
+
+  convertAst(ast);
+
+  var changed = true;
+  while (changed) {
+    changed = false;
+    for (var declaration of declarations) {
+      var parent = declaration.parent;
+      if (parent.kehyield) {
+        for (var i = 0; i < declaration.calls.length; i++) {
+          var call = declaration.calls[i];
+          var callScope = call.scope;
+          if (!callScope.kehyield) {
+            callScope.kehyield = true;
+            callScope.generator = true;
+            changed = true;
+          }
+        }
+      }
+    }
+  }
+
+  var calls = new Set();
+  for (var declaration of declarations) {
+    if (declaration.parent.kehyield) {
+      for (var i = 0; i < declaration.calls.length; i++) {
+        var call = declaration.calls[i];
+        if (!call.transformed) {
+          calls.add(call);
+        }
+      }
+    }
+  }
 
   estraverse.replace(ast, {
     enter: function(node, parent) {
       var replacement = node;
-      if (/CallExpression/.test(node.type) && node.callee.name && !node.visited) {
-        if (/_kehyield_$/.test(node.callee.name)) {
-          currentScope.block.generator = true;
-          currentScope.block.kehyield = true;
-          replacement =  wrapWithYieldExpression(node);
-        } else {
-          var declaration = source(node.callee);
-          if (declaration && declaration.parent && declaration.parent.kehyield) {
-            currentScope.block.generator = true;
-            currentScope.block.kehyield = true;
-            replacement = wrapWithYieldExpression(node);
-          }
+      if (!node.visited2) {
+        if (calls.has(replacement)) {
+          replacement = wrapWithYieldExpression(replacement);
         }
+        node.visited2 = true;
       }
-
-      if (/Function/.test(node.type)) {
-        currentScope = scopeManager.acquire(node);
-      }
-
-      node.visited = true;
       return replacement;
-    },
-    leave: function(node, parent) {
-      if (/Function/.test(node.type)) {
-        currentScope = currentScope.upper;
-      }
     }
   });
+
+  //console.log(declarations);
 
   return escodegen.generate(ast);
 }
