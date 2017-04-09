@@ -19,28 +19,33 @@ implement main0() = let
   val () = arrayref_foreach_cloref(S, N, lam(i) => M[0] := (if S[i] > M[0] then S[i] else M[0]))
   val M : double = M[0]
 
+  fun {} make_color(r: double) = let
+    val c = toString(255.0 - JSmath_round(r * 255.0));
+  in
+    "rgb(" + c + "," + c + "," + c + ")"
+  end
+
   fun {} draw():<cloptr1> void = let
     val canvas = canvas2d_getById("Patsoptaas-Evaluate-canvas")
     val () = canvas2d_clearRect(canvas, 0, 0, WIDTH, HEIGHT)
-    val () = canvas2d_set_strokeStyle_string(canvas, "#333333")
     val () = arrayref_foreach_cloref{double}(S, N,
       lam (i) => let
-        val x = $UN.cast{double}(i) * $UN.cast{double}(WIDTH) / $UN.cast{double}(N)
-        val y = $UN.cast{double}(HEIGHT)
-        val width  = $UN.cast{double}(WIDTH) / $UN.cast{double}(N)
-        val height = S[i] / M * $UN.cast{double}(HEIGHT) * ~1.0
+        val intensity = S[i] / M
+        val x         = $UN.cast{double}(i) * $UN.cast{double}(WIDTH) / $UN.cast{double}(N)
+        val y         = $UN.cast{double}(HEIGHT)
+        val width     = $UN.cast{double}(WIDTH) / $UN.cast{double}(N)
+        val height    = intensity * $UN.cast{double}(HEIGHT) * ~1.0
+        val () = canvas2d_set_fillStyle_string(canvas, make_color(intensity))
       in
-        canvas2d_fillRect(canvas, x, y, width, height)
+        canvas2d_fillRect(canvas, x, y, width * 0.8, height)
       end)
-    val () = canvas2d_stroke(canvas)
   in end
-
 
   fun {a:t@ype} array_swap {i,j,n:nat | i < j; j < n} (A: !arrayref(a,n), i: int i, j: int j): void = let
     val tmp = A[i]
     val () = A[i] := A[j]
     val () = A[j] := tmp
-    val () = sleep(100)
+    val () = sleep(1)
     val () = draw()
   in end 
    
