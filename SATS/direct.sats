@@ -19,6 +19,28 @@ go_cloptr1(() -<lin,cloptr1> void): coroutine = "mac#_ats2keh_go_cloptr1"
 
 macdef go(f) = go_cloptr1(llam() =<cloptr1> ,(f))
 
+extern fun
+sync1(coroutine): void = "mac#_ats2keh_sync_kehyield_"
+
+extern fun
+sync2(coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+
+extern fun
+sync3(coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+
+extern fun
+sync4(coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+
+extern fun
+sync5(coroutine, coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+
+overload sync with sync1
+overload sync with sync2
+overload sync with sync3
+overload sync with sync4
+overload sync with sync5
+
+
 // --------------------------------------------------------------------------- 
 
 extern fun
@@ -82,6 +104,9 @@ ch2split(ch2endpt): '(ch1in, ch1out) = "mac#_ats2keh_ch2split"
 extern fun
 chmake_ws(string): ch2endpt = "mac#_ats2keh_makeWebSocketChannel"
 
+//extern fun
+//chmake_event(string, string): ch1in =
+
 // --------------------------------------------------------------------------- 
 
 extern fun
@@ -90,7 +115,7 @@ sleep(int): void = "mac#_ats2keh_sleep_kehyield_"
 extern fun
 main0(): void = "main0"
 
-%{^
+%{$
   window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false);
     (function(){
