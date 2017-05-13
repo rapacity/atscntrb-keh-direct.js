@@ -20,6 +20,14 @@ end
 )
 *)
 
+
+//fun {v:t@ype}test(a:v): v = let
+//in a end
+
+extern fun{v:t@ype} test(a:v): v = "mac#adf" //let
+//in a end
+
+
 fun
 filter
    (n0: int, up: ch2endpt, dn: ch2endpt): void = let
@@ -63,5 +71,7 @@ implement main0() = let
   val _ = go(sieve(dn0, up1))
   val _ = go(producer(up0, 2))
   val _ = go(consumer(dn1))
+  val x = test<int>(1)
+  val x = test<string>("sf")
 in end
 

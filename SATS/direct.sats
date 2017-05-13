@@ -20,25 +20,25 @@ go_cloptr1(() -<lin,cloptr1> void): coroutine = "mac#_ats2keh_go_cloptr1"
 macdef go(f) = go_cloptr1(llam() =<cloptr1> ,(f))
 
 extern fun
-sync1(coroutine): void = "mac#_ats2keh_sync_kehyield_"
+join1(coroutine): void = "mac#_ats2keh_sync_kehyield_"
 
 extern fun
-sync2(coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+join2(coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
 
 extern fun
-sync3(coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+join3(coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
 
 extern fun
-sync4(coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+join4(coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
 
 extern fun
-sync5(coroutine, coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
+join5(coroutine, coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
 
-overload sync with sync1
-overload sync with sync2
-overload sync with sync3
-overload sync with sync4
-overload sync with sync5
+overload join with join1
+overload join with join2
+overload join with join3
+overload join with join4
+overload join with join5
 
 
 // --------------------------------------------------------------------------- 
@@ -110,7 +110,13 @@ chmake_ws(string): ch2endpt = "mac#_ats2keh_makeWebSocketChannel"
 // --------------------------------------------------------------------------- 
 
 extern fun
+wakeup(): void = "mac#_ats2keh_wakeup"
+
+extern fun
 sleep(int): void = "mac#_ats2keh_sleep_kehyield_"
+
+extern fun
+msleep(int): void = "mac#_ats2keh_sleep_kehyield_"
 
 extern fun
 main0(): void = "main0"

@@ -13,10 +13,10 @@ staload "{$LIBATSCC2JS}/SATS/HTML/canvas-2d/canvas2d.sats"
 #define HEIGHT 600
  
 
-val S = arrayref_make_elt{double}(N, 0.0)
-val () = arrayref_foreach_cloref(S, N, lam(i) => S[i] := JSmath_random())
+val A = arrayref_make_elt{double}(N, 0.0)
+val () = arrayref_foreach_cloref(A, N, lam(i) => A[i] := JSmath_random())
 val M = arrayref_make_elt{double}(1, 0.0)
-val () = arrayref_foreach_cloref(S, N, lam(i) => M[0] := (if S[i] > M[0] then S[i] else M[0]))
+val () = arrayref_foreach_cloref(A, N, lam(i) => M[0] := (if A[i] > M[0] then A[i] else M[0]))
 val M = M[0]
 
 fun make_color(r: double) = let
@@ -28,9 +28,9 @@ end
 fun draw(): void = let
   val canvas = canvas2d_getById("Patsoptaas-Evaluate-canvas")
   val () = canvas2d_clearRect(canvas, 0, 0, WIDTH, HEIGHT)
-  val () = arrayref_foreach_cloref{double}(S, N,
+  val () = arrayref_foreach_cloref{double}(A, N,
     lam (i) => let
-      val intensity = S[i] / M
+      val intensity = A[i] / M
       val x         = int2double(i) * int2double(WIDTH) / int2double(N)
       val y         = int2double(HEIGHT)
       val width     = int2double(WIDTH) / int2double(N)
@@ -80,7 +80,8 @@ fun {a:t@ype} mergesort {sz,l,n:nat | l + sz <= n} (A: !arrayref (a, n), l: int 
       val r   = l + szl
       val c0 = go(mergesort(A, l, szl))
       val c1 = go(mergesort(A, r, szr))
-      val () = sync(c0, c1)
+      val () = join(c0)
+      val () = join(c1)
     in
       merge(A, l, r, l + sz)
     end
@@ -91,7 +92,7 @@ extern fun my_dynload(): void = "mac#my_dynload"
 
 implement main0() = let
   val () = my_dynload()
-  val () = mergesort(S,0,N)
+  val () = mergesort(A,0,N)
 in end
 
 

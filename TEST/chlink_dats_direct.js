@@ -1,16 +1,3 @@
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
 function __patsfun_4__closurerize(env0) {
     return [
         function* (cenv) {
@@ -149,3 +136,16 @@ function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_m
     }
     return;
 }
+window.addEventListener('load', function load(event) {
+    window.removeEventListener('load', load, false);
+    (function () {
+        M.wakeup();
+        if (main0 && main0.constructor) {
+            if (main0.constructor.name === 'GeneratorFunction')
+                M.addCoroutine(main0);
+            else if (main0.constructor.name === 'Function')
+                M.addJobCallback(main0);
+            M.wakeup();
+        }
+    }());
+});
