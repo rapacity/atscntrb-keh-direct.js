@@ -16,7 +16,8 @@ all: \
 	group3_dats_direct.js \
 	sieve_dats_direct.js \
 	sieve2_dats_direct.js \
-	mergesort_dats_direct.js 
+	mergesort_dats_direct.js \
+	chatclient_dats_direct.js
 
 %_dats.c: %.dats
 	$(PATSCC2) -ccats -o $@ $<

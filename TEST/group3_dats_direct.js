@@ -1,16 +1,3 @@
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
 function __patsfun_5__closurerize(env0) {
     return [
         function* (cenv) {
@@ -155,9 +142,9 @@ function main0() {
     tmp37 = tmp36[0];
     tmp38 = tmp36[1];
     ch3link_3(tmp32, tmp35, tmp38);
-    tmp40 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp31));
-    tmp42 = _ats2keh_go_cloptr1(__patsfun_6__closurerize(tmp34));
-    tmp44 = _ats2keh_go_cloptr1(__patsfun_7__closurerize(tmp37));
+    tmp40 = _ats2keh_go_cloptr(__patsfun_5__closurerize(tmp31));
+    tmp42 = _ats2keh_go_cloptr(__patsfun_6__closurerize(tmp34));
+    tmp44 = _ats2keh_go_cloptr(__patsfun_7__closurerize(tmp37));
     return;
 }
 function* __patsfun_5(env0) {

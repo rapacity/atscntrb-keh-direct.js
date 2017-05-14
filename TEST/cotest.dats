@@ -2,18 +2,18 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 
 fun helloloop(): void = let
   val () = console_log(if JSmath_random() > 0.5 then "HELLO" else "BYE")
-  val () = sleep(2000)
+  val () = msleep(2000)
   val () = helloloop()
 in end
 
 fun producer(ch: ch2endpt): void = let
   val n  = JSmath_random() * 100000
-  val () = sleep(1000)
+  val () = msleep(1000)
   val () = ch2send(ch, n);
   val () = producer(ch)
 in end

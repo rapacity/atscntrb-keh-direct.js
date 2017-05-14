@@ -1,16 +1,3 @@
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
 function __patsfun_4__closurerize(env0) {
     return [
         function* (cenv) {
@@ -108,9 +95,9 @@ function main0() {
     tmp16 = _ats2keh_ch2make();
     tmp17 = tmp16[0];
     tmp18 = tmp16[1];
-    tmp19 = _ats2keh_go_cloptr1(__patsfun_4__closurerize(tmp17));
-    tmp21 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp18));
-    tmp23 = _ats2keh_go_cloptr1(__patsfun_6__closurerize());
+    tmp19 = _ats2keh_go_cloptr(__patsfun_4__closurerize(tmp17));
+    tmp21 = _ats2keh_go_cloptr(__patsfun_5__closurerize(tmp18));
+    tmp23 = _ats2keh_go_cloptr(__patsfun_6__closurerize());
     return;
 }
 function* __patsfun_4(env0) {

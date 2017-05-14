@@ -2,7 +2,7 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 staload "{$LIBATSCC2JS}/SATS/HTML/canvas-2d/canvas2d.sats"
 
@@ -45,7 +45,7 @@ fun {a:t@ype} array_swap {i,j,n:nat | i < j; j < n} (A: !arrayref(a,n), i: int i
   val tmp = A[i]
   val () = A[i] := A[j]
   val () = A[j] := tmp
-  val () = sleep(1)
+  val () = msleep(1)
   val () = draw()
 in end 
  
@@ -80,8 +80,8 @@ fun {a:t@ype} mergesort {sz,l,n:nat | l + sz <= n} (A: !arrayref (a, n), l: int 
       val r   = l + szl
       val c0 = go(mergesort(A, l, szl))
       val c1 = go(mergesort(A, r, szr))
-      val () = join(c0)
-      val () = join(c1)
+      val _ = join(c0)
+      val _ = join(c1)
     in
       merge(A, l, r, l + sz)
     end

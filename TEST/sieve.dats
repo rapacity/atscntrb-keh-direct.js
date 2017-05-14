@@ -2,7 +2,7 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 (*
 ** stream-based
@@ -19,13 +19,6 @@ in
 end
 )
 *)
-
-
-//fun {v:t@ype}test(a:v): v = let
-//in a end
-
-extern fun{v:t@ype} test(a:v): v = "mac#adf" //let
-//in a end
 
 
 fun
@@ -61,7 +54,7 @@ in end
 fun consumer(ch: ch2endpt): void = let
   val n = ch2recv{int}(ch)
   val () = console_log("received: " + toString(n))
-  val () = sleep(1000)
+  val () = msleep(1000)
   val () = consumer(ch)
 in end
 
@@ -71,7 +64,5 @@ implement main0() = let
   val _ = go(sieve(dn0, up1))
   val _ = go(producer(up0, 2))
   val _ = go(consumer(dn1))
-  val x = test<int>(1)
-  val x = test<string>("sf")
 in end
 

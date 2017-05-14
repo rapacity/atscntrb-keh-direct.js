@@ -148,18 +148,19 @@ function* mergesort_8__8__1(arg0, arg1, arg2) {
     var tmp70__1;
     var tmp71__1;
     var tmp73__1;
-    var tmp76__1;
+    var tmp77__1;
     var tmplab, tmplab_js;
     tmp67__1 = ats2jspre_gte_int1_int1(arg2, 2);
     if (tmp67__1) {
         tmp68__1 = ats2jspre_half_int1(arg2);
         tmp69__1 = ats2jspre_sub_int1_int1(arg2, tmp68__1);
         tmp70__1 = ats2jspre_add_int1_int1(arg1, tmp68__1);
-        tmp71__1 = _ats2keh_go_cloptr1(__patsfun_9__9__1__closurerize(arg0, arg1, tmp68__1));
-        tmp73__1 = _ats2keh_go_cloptr1(__patsfun_10__10__1__closurerize(arg0, tmp69__1, tmp70__1));
-        yield * _ats2keh_sync_kehyield_(tmp71__1, tmp73__1);
-        tmp76__1 = ats2jspre_add_int1_int1(arg1, arg2);
-        yield * merge_7__7__1(arg0, arg1, tmp70__1, tmp76__1);
+        tmp71__1 = _ats2keh_go_cloptr(__patsfun_9__9__1__closurerize(arg0, arg1, tmp68__1));
+        tmp73__1 = _ats2keh_go_cloptr(__patsfun_10__10__1__closurerize(arg0, tmp69__1, tmp70__1));
+        yield * _ats2keh_join_kehyield_(tmp71__1);
+        yield * _ats2keh_join_kehyield_(tmp73__1);
+        tmp77__1 = ats2jspre_add_int1_int1(arg1, arg2);
+        yield * merge_7__7__1(arg0, arg1, tmp70__1, tmp77__1);
     } else {
     }
     return;
@@ -236,10 +237,10 @@ function* merge_7__7__1(arg0, arg1, arg2, arg3) {
     }
 }
 function ATSLIB_056_prelude__gcompare_val_val__16__1(arg0, arg1) {
-    var tmpret101__1;
+    var tmpret103__1;
     var tmplab, tmplab_js;
-    tmpret101__1 = ats2jspre_compare_double_double(arg0, arg1);
-    return tmpret101__1;
+    tmpret103__1 = ats2jspre_compare_double_double(arg0, arg1);
+    return tmpret103__1;
 }
 function* move_left_6__6__1(arg0, arg1, arg2) {
     var apy0;
@@ -302,16 +303,3 @@ function my_dynload() {
     _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_modules_057_atscntrb_055_keh_055_direct_056_js_057_TEST_057_mergesort_056_dats__dynload();
     return;
 }
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});

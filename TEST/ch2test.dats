@@ -2,17 +2,17 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 
 fun helloloop(): void = let
   val () = console_log(if JSmath_random() > 0.5 then "HELLO" else "BYE")
-  val () = sleep(6000)
+  val () = msleep(6000)
   val () = helloloop()
 in end
 
 fun workerA(ch: ch2endpt): void = let
-  val () = sleep(3000)
+  val () = msleep(3000)
   val n  = JSmath_random() * 100000
   val () = console_log("<workerA> send to workerB: " + toString(n))
   val () = ch2send(ch, n)
@@ -22,7 +22,7 @@ fun workerA(ch: ch2endpt): void = let
 in end
 
 fun workerB(ch: ch2endpt): void = let
-  val () = sleep(3000)
+  val () = msleep(3000)
   val n  = ch2recv(ch)
   val () = console_log("<workerB> recv from workerA: " + n)
   val n  = JSmath_random() * 100000

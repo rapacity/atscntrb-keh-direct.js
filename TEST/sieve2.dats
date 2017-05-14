@@ -2,7 +2,7 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 fun ch1filter{a:t@ype}(in0: ch1in, f: (a) -<cloptr1> bool): ch1in = let
   fun loop{a:t@ype}(cout: ch1out, cin: ch1in, f: (a) -<cloptr1> bool): void = let
@@ -47,7 +47,7 @@ end
 fun consumer(ch: ch1in): void = let
   val n = ch1recv{int}(ch)
   val () = console_log("received: " + toString(n))
-  val () = sleep(1000)
+  val () = msleep(1000)
   val () = consumer(ch)
 in end
 

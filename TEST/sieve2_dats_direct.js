@@ -1,16 +1,3 @@
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
 function __patsfun_2__closurerize(env0, env1, env2) {
     return [
         function* (cenv) {
@@ -66,7 +53,7 @@ function ch1filter_0(arg0, arg1) {
     tmp5 = _ats2keh_ch1make();
     tmp6 = tmp5[0];
     tmp7 = tmp5[1];
-    tmp8 = _ats2keh_go_cloptr1(__patsfun_2__closurerize(arg0, arg1, tmp7));
+    tmp8 = _ats2keh_go_cloptr(__patsfun_2__closurerize(arg0, arg1, tmp7));
     tmpret0 = tmp6;
     return tmpret0;
 }
@@ -114,7 +101,7 @@ function ch1iota_3(arg0, arg1) {
     tmp14 = _ats2keh_ch1make();
     tmp15 = tmp14[0];
     tmp16 = tmp14[1];
-    tmp17 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(arg0, arg1, tmp16));
+    tmp17 = _ats2keh_go_cloptr(__patsfun_5__closurerize(arg0, arg1, tmp16));
     tmpret10 = tmp15;
     return tmpret10;
 }
@@ -157,7 +144,7 @@ function sieve_6(arg0) {
     tmp26 = _ats2keh_ch1make();
     tmp27 = tmp26[0];
     tmp28 = tmp26[1];
-    tmp29 = _ats2keh_go_cloptr1(__patsfun_9__closurerize(arg0, tmp28));
+    tmp29 = _ats2keh_go_cloptr(__patsfun_9__closurerize(arg0, tmp28));
     tmpret19 = tmp27;
     return tmpret19;
 }
@@ -227,7 +214,7 @@ function main0() {
     var tmplab, tmplab_js;
     tmp38 = ch1iota_3(2, 1);
     tmp39 = sieve_6(tmp38);
-    tmp40 = _ats2keh_go_cloptr1(__patsfun_12__closurerize(tmp39));
+    tmp40 = _ats2keh_go_cloptr(__patsfun_12__closurerize(tmp39));
     return;
 }
 function* __patsfun_12(env0) {

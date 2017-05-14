@@ -1,16 +1,3 @@
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
 function __patsfun_2__closurerize(env0) {
     return [
         function* (cenv) {
@@ -44,7 +31,7 @@ function main0() {
     var tmp13;
     var tmplab, tmplab_js;
     tmp12 = _ats2keh_makeWebSocketChannel('ws://localhost:5000/');
-    tmp13 = _ats2keh_go_cloptr1(__patsfun_2__closurerize(tmp12));
+    tmp13 = _ats2keh_go_cloptr(__patsfun_2__closurerize(tmp12));
     return;
 }
 function* __patsfun_2(env0) {

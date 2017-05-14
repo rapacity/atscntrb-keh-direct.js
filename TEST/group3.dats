@@ -2,10 +2,10 @@
 #include "share/atspre_define.hats"
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
-#include "../SATS/direct.sats"
+staload "./../SATS/basic.sats"
 
 fun worker0(ch: ch2endpt): void = let
-  val () = sleep(3000)
+  val () = msleep(3000)
   val n  = JSmath_random() * 100000
   val () = ch2send(ch, '(0, n))
   val msg = ch2recv(ch)
@@ -14,7 +14,7 @@ fun worker0(ch: ch2endpt): void = let
 in end
 
 fun worker1(ch: ch2endpt): void = let
-  val () = sleep(3000)
+  val () = msleep(3000)
   val msg = ch2recv(ch)
   val () = console_log("<worker1> recv: " + msg)
   val n  = JSmath_random() * 100000
@@ -23,7 +23,7 @@ fun worker1(ch: ch2endpt): void = let
 in end
 
 fun worker2(ch: ch2endpt): void = let
-  val ()  = sleep(3000)
+  val ()  = msleep(3000)
   val msg = ch2recv(ch)
   val ()  = console_log("<worker2> logged: " + msg)
   val ()  = worker2(ch)

@@ -5,103 +5,89 @@ absviewtype ch1in
 absviewtype ch1out
 absviewtype ch2endpt
 
-extern fun
+fun
 yield{a:vt@ype}(): a = "mac#_ats2keh_kehyield_"
 
-extern fun
+fun
 go_apply{a,b:vt@ype}(a, b): coroutine = "mac#_ats2keh_addCoroutine"
 
-extern fun
+fun
 go_nil{a:vt@ype}(a): coroutine = "mac#_ats2keh_addCoroutine"
 
-extern fun
-go_cloptr1(() -<lin,cloptr1> void): coroutine = "mac#_ats2keh_go_cloptr1"
+fun
+go_cloptr(() -<lin,cloptr1> void): coroutine = "mac#_ats2keh_go_cloptr"
 
-macdef go(f) = go_cloptr1(llam() =<cloptr1> ,(f))
+macdef go(f) = go_cloptr(llam() =<lin,cloptr1> ,(f))
 
-extern fun
-join1(coroutine): void = "mac#_ats2keh_sync_kehyield_"
-
-extern fun
-join2(coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
-
-extern fun
-join3(coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
-
-extern fun
-join4(coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
-
-extern fun
-join5(coroutine, coroutine, coroutine, coroutine, coroutine): void = "mac#_ats2keh_sync_kehyield_"
-
-overload join with join1
-overload join with join2
-overload join with join3
-overload join with join4
-overload join with join5
-
+fun
+join(coroutine): void = "mac#_ats2keh_join_kehyield_"
 
 // --------------------------------------------------------------------------- 
 
-extern fun
+fun
 ch1make{a:t@ype}(): '(ch1in, ch1out) = "mac#_ats2keh_ch1make"
 
-extern fun
+fun
 ch1send{a:vt@ype}(!ch1out, a): void = "mac#_ats2keh_ch1send_kehyield_"
 
-extern fun
+fun
 ch1recv{a:vt@ype}(!ch1in): a = "mac#_ats2keh_ch1recv_kehyield_"
 
-extern fun
+fun
 ch1inclose(ch1in): void = "mac#_ats2keh_ch1inclose"
 
-extern fun
+fun
 ch1outclose(ch1out): void = "mac#_ats2keh_ch1outclose"
 
 overload ch1close with ch1inclose
 overload ch1close with ch1outclose
 
+fun
+ch1infree(ch1in): void = "mac#_ats2keh_ch1inclose"
 
-extern fun
+fun
+ch1outfree(ch1out): void = "mac#_ats2keh_ch1outclose"
+
+fun
 ch1indup(!ch1in): ch1in = "mac#_ats2keh_ch1indup"
 
-extern fun
+fun
 ch1outdup(!ch1out): ch1out = "mac#_ats2keh_ch1outdup"
 
 overload ch1dup with ch1indup
 overload ch1dup with ch1outdup
 
-extern fun
+fun
 ch1link(ch1in, ch1out): void = "mac#_ats2keh_ch1link"
 
 // --------------------------------------------------------------------------- 
 
-extern fun
+fun
 ch2make{a:t@ype}(): '(ch2endpt, ch2endpt) = "mac#_ats2keh_ch2make"
 
-extern fun
+fun
 ch2send{a:vt@ype}(!ch2endpt, a): void = "mac#_ats2keh_ch2send_kehyield_"
 
-extern fun
+fun
 ch2recv{a:vt@ype}(!ch2endpt): a = "mac#_ats2keh_ch2recv_kehyield_"
 
-extern fun
+fun
 ch2link(ch2endpt, ch2endpt): void = "mac#_ats2keh_ch2link"
 
-extern fun
+fun
 ch2close(ch2endpt): void = "mac#_ats2keh_ch2close"
 
-extern fun
+fun
 ch2dup(!ch2endpt): ch2endpt = "mac#_ats2keh_ch2dup"
 
-extern fun
+fun
 ch2split(ch2endpt): '(ch1in, ch1out) = "mac#_ats2keh_ch2split"
 
 
 
 // --------------------------------------------------------------------------- 
 
-extern fun
+fun
 chmake_ws(string): ch2endpt = "mac#_ats2keh_makeWebSocketChannel"
 
 //extern fun
@@ -109,29 +95,14 @@ chmake_ws(string): ch2endpt = "mac#_ats2keh_makeWebSocketChannel"
 
 // --------------------------------------------------------------------------- 
 
-extern fun
+fun
 wakeup(): void = "mac#_ats2keh_wakeup"
 
-extern fun
-sleep(int): void = "mac#_ats2keh_sleep_kehyield_"
-
-extern fun
+fun
 msleep(int): void = "mac#_ats2keh_sleep_kehyield_"
 
-extern fun
+fun
 main0(): void = "main0"
 
-%{$
-  window.addEventListener("load", function load(event){
-    window.removeEventListener("load", load, false);
-    (function(){
-      M.wakeup();
-      if (main0 && main0.constructor) {
-        if (main0.constructor.name === 'GeneratorFunction') M.addCoroutine(main0);
-        else if (main0.constructor.name === 'Function') M.addJobCallback(main0);
-        M.wakeup();
-      }
-    })();
-  });
-%}
+
 

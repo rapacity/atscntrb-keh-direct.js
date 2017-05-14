@@ -109,9 +109,9 @@ function main0() {
     tmp24 = tmp22[1];
     _ats2keh_ch2link(tmp18, tmp20);
     _ats2keh_ch2link(tmp21, tmp23);
-    tmp27 = _ats2keh_go_cloptr1(__patsfun_4__closurerize(tmp17));
-    tmp29 = _ats2keh_go_cloptr1(__patsfun_5__closurerize(tmp24));
-    tmp31 = _ats2keh_go_cloptr1(__patsfun_6__closurerize());
+    tmp27 = _ats2keh_go_cloptr(__patsfun_4__closurerize(tmp17));
+    tmp29 = _ats2keh_go_cloptr(__patsfun_5__closurerize(tmp24));
+    tmp31 = _ats2keh_go_cloptr(__patsfun_6__closurerize());
     return;
 }
 function* __patsfun_4(env0) {
@@ -136,16 +136,3 @@ function _057_home_057_unknown_057_world_057_courses_057_myatscontrib_057_node_m
     }
     return;
 }
-window.addEventListener('load', function load(event) {
-    window.removeEventListener('load', load, false);
-    (function () {
-        M.wakeup();
-        if (main0 && main0.constructor) {
-            if (main0.constructor.name === 'GeneratorFunction')
-                M.addCoroutine(main0);
-            else if (main0.constructor.name === 'Function')
-                M.addJobCallback(main0);
-            M.wakeup();
-        }
-    }());
-});
