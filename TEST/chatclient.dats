@@ -3,8 +3,8 @@
 #include "{$LIBATSCC2JS}/mylibies.hats"
 
 staload "./../SATS/basic.sats"
-staload "./../SATS/frp.sats"
-staload _ = "./../DATS/frp.dats"
+//staload "./../SATS/frp.sats"
+//staload _ = "./../DATS/frp.dats"
 
 #define ATS_MAINATSFLAG 1
 #define ATS_DYNLOADNAME "my_dynload"
