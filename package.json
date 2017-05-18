@@ -1,0 +1,40 @@
+{
+  "name": "atscntrb-keh-direct.js",
+  "version": "0.0.3",
+  "description": "Converts atscc2js output to support yieldable functions.",
+  "main": "index.js",
+  "scripts": {
+    "directcc": "./bin/directcc"
+  },
+  "bin": {
+    "directcc": "./bin/directcc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelharake/atscntrb-keh-direct.js.git"
+  },
+  "keywords": [
+    "ATS", "js"
+  ],
+  "author": "Khalil El-Harake",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kelharake/atscntrb-keh-direct.js/issues"
+  },
+  "homepage": "https://github.com/kelharake/atscntrb-keh-direct.js#readme",
+  "dependencies": {
+    "esprima": "3.1.3",
+    "escodegen": "1.8.1",
+    "estraverse": "4.2.0",
+    "escope": "3.6.0",
+    "ast-declaration-source": "1.0.0",
+    "astw": "2.2.0",
+    "get-stdin": "5.0.1",
+    "fs": "latest",
+    "command-line-args": "4.0.2",
+    "command-line-usage": "4.0.0"
+  }
+}
+
+
+
